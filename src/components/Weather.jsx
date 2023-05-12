@@ -7,26 +7,36 @@ function Weather({ latitude, longitude, timeZone }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
+        // Make request to get the associate grid location for the latitude and longitude
+        const getGridURL = `https://api.weather.gov/points/${latitude},${longitude}`;
+        const gridRequest = await axios.get(getGridURL);
 
-      const getGridURL = `https://api.weather.gov/points/${latitude},${longitude}`;
-      const gridRequest = await axios.get(getGridURL);
-      const hourlyForecastURL = gridRequest.data.properties.forecastHourly;
-      const hourlyForecastRequest = await axios.get(hourlyForecastURL);
-      const periods = hourlyForecastRequest.data.properties.periods;
+        // Make request to get the hourly forecast for the grid location
+        const hourlyForecastURL = gridRequest.data.properties.forecastHourly;
+        const hourlyForecastRequest = await axios.get(hourlyForecastURL);
+        const periods = hourlyForecastRequest.data.properties.periods;
 
-      let idealPeriod = periods[0];
-      if (idealPeriod.isDaytime && new Date(idealPeriod.startTime).getHours() < 23) {
-        for (let i = 0; i < periods.length; i++) {
-          if (new Date(periods[i].startTime).getHours() === 23) {
-            idealPeriod = periods[i];
-            break;
+        // Find the ideal period to display (11pm if during the day and before 11pm.)
+        let idealPeriod = periods[0];
+        if (
+          idealPeriod.isDaytime &&
+          new Date(idealPeriod.startTime).getHours() < 23
+        ) {
+          for (let i = 0; i < periods.length; i++) {
+            if (new Date(periods[i].startTime).getHours() === 23) {
+              idealPeriod = periods[i];
+              break;
+            }
           }
         }
-      }
 
-      setWeather(idealPeriod);
-      console.log (weather);
-      
+        // Set the weather state to the ideal period
+        setWeather(idealPeriod);
+        console.log(weather);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
   }, [latitude, longitude, timeZone]);
@@ -40,9 +50,14 @@ function Weather({ latitude, longitude, timeZone }) {
         {weather && weather.relativeHumidity && (
           <p>Relative Humidity: {weather.relativeHumidity.value}%</p>
         )}
-        {weather && weather.probabilityOfPrecipitation && (weather.probabilityOfPrecipitation.value > 10) && (
-          <p>Chance of Precipitation : {weather.probabilityOfPrecipitation.value}%</p>
-        )}
+        {weather &&
+          weather.probabilityOfPrecipitation &&
+          weather.probabilityOfPrecipitation.value > 10 && (
+            <p>
+              Chance of Precipitation :{" "}
+              {weather.probabilityOfPrecipitation.value}%
+            </p>
+          )}
         <p>Wind Speed: {weather.windSpeed}</p>
       </div>
     </div>

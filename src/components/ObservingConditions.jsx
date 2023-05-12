@@ -48,7 +48,6 @@ function ObservingConditions(props) {
         ); //date in the local timezone of the zipcode
         console.log(currentDate);
 
-        
         let currentHour = currentDate.getHours(); // Get the current hour (0-23)
         if (currentHour < 23 && currentHour > 5) {
           // Set the time to 11:00pm (23:00) if it is between 5am and 11pm
@@ -76,9 +75,7 @@ function ObservingConditions(props) {
     <div>
       <h1>Tonight's Visibility</h1>
       {/* weather stuff*/}
-      <Weather latitude = {latitude} longitude = {longitude} timeZone = {timeZone} />
-
-
+      <Weather latitude={latitude} longitude={longitude} timeZone={timeZone} />
 
       <h2>Enter your zip code to see what you can see tonight!</h2>
       <input
