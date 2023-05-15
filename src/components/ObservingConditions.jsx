@@ -7,7 +7,7 @@ import "../styles/styles.css";
 function ObservingConditions(props) {
   const [zipCode, setZipCode] = useState("03755");
   const [latitude, setLatitude] = useState(43);
-  const [longitude, setLongitutde] = useState(-72);
+  const [longitude, setLongitude] = useState(-72);
   const [timeZone, setTimeZone] = useState("America/New_York");
   const [visibleObjects, setVisibleObjects] = useState([]);
 
@@ -16,6 +16,7 @@ function ObservingConditions(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Make sure the zip code is valid
         if (zipCode.length !== 5) {
           return;
         }
@@ -26,44 +27,35 @@ function ObservingConditions(props) {
         const lng = Math.floor(location[0]);
         const lat = Math.floor(location[1]);
         setLatitude(lat);
-        setLongitutde(lng);
-        console.log(Math.floor(Date.now() / 1000));
+        setLongitude(lng);
 
+        // Get the timezone of the zip code using google maps API
         const googleMapsURL = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${Math.floor(
           Date.now() / 1000
         )}&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`;
-
-        // Get the current time at the zip code using timezonedb API
         const googleMapsRequest = await axios.get(googleMapsURL);
-        console.log(googleMapsRequest.data);
         const tZone = googleMapsRequest.data.timeZoneId;
         setTimeZone(tZone);
 
-        console.log(tZone);
         let dateWithoutTZone = new Date(); // Get the current date and time
-        console.log(dateWithoutTZone);
         let currentDate = new Date(
           dateWithoutTZone.toLocaleString("en-US", {
             timeZone: tZone,
           })
         ); //date in the local timezone of the zipcode
-        console.log(currentDate);
 
         let currentHour = currentDate.getHours(); // Get the current hour (0-23)
         if (currentHour < 23 && currentHour > 5) {
           // Set the time to 11:00pm (23:00) if it is between 5am and 11pm
-          console.log("between 5am and 11pm");
           currentDate.setHours(23);
         }
 
-        let isoDateTime = currentDate.toISOString(); // Get the ISO date-time string
-        console.log(isoDateTime);
+        let isoDateTime = currentDate.toISOString(); // Get the ISO date-time string for the visibleplanets API call
 
         // Get the visible objects at the zip code and at 9pm/current time using the visibleplanets API
         const visible_planets_url = `https://api.visibleplanets.dev/v3?latitude=${lat}&longitude=${lng}&time=${isoDateTime}`;
         const response2 = await axios.get(visible_planets_url);
         setVisibleObjects(response2.data.data);
-        console.log(response2.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -74,7 +66,8 @@ function ObservingConditions(props) {
 
   return (
     <div id="visibility" class="section">
-      <h1 >What's Visible Tonight</h1>
+      
+      <h1>What's Visible Tonight</h1>
       <div>
         <div className="zipcode-container">
           <h2>Enter your zip code: </h2>
@@ -85,12 +78,15 @@ function ObservingConditions(props) {
             id="zipcode-input"
           />
         </div>
+
         <Weather
           latitude={latitude}
           longitude={longitude}
           timeZone={timeZone}
         />
+
         <div className="card" id="objects-card">
+          {/* Make sure there are objects to render*/}
           {visibleObjects.length > 0 &&
             visibleObjects.map((object) => {
               const imgURL =
@@ -106,7 +102,10 @@ function ObservingConditions(props) {
                 </div>
               );
             })}
+
+          {/* If there are no objects to render, display a message */}
           {visibleObjects.length === 0 && <h2>No objects visible tonight</h2>}
+
         </div>
       </div>
     </div>
