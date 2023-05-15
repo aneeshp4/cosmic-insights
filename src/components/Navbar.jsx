@@ -5,6 +5,9 @@ function Navbar() {
   return (
     <nav>
       <ul>
+        <h1 id="title">
+          <i class="fa-solid fa-satellite"></i>Cosmic Insights
+        </h1>
         <li>
           <Link to="potd" smooth={true} duration={1000}>
             Picture of the Day

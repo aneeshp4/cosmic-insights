@@ -60,20 +60,20 @@ function Weather({ latitude, longitude, timeZone }) {
         )}
       <div className="weather-info">
         <h3>{weather.shortForecast}</h3>
-        <p>Temperature: {weather.temperature}°F</p>
+        <p>🌡️ Temperature: {weather.temperature}°F</p>
         {weather && weather.relativeHumidity && (
-          <p>Relative Humidity: {weather.relativeHumidity.value}%</p>
+          <p>💧 Relative Humidity: {weather.relativeHumidity.value}%</p>
         )}
         {/* conditionally render precipitation if it will rain */}
         {weather &&
           weather.probabilityOfPrecipitation &&
           weather.probabilityOfPrecipitation.value > 10 && (
             <p>
-              Chance of Precipitation :{" "}
+              🌧️ Chance of Precipitation :{" "}
               {weather.probabilityOfPrecipitation.value}%
             </p>
           )}
-        <p>Wind Speed: {weather.windSpeed}</p>
+        <p>💨 Wind Speed: {weather.windSpeed}</p>
       </div>
     </div>
   );

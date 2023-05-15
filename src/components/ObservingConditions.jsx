@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Weather from "./Weather";
 import { useState, useEffect } from "react";
+import "../styles/styles.css";
 
 function ObservingConditions(props) {
   const [zipCode, setZipCode] = useState("03755");
@@ -72,29 +73,42 @@ function ObservingConditions(props) {
   }, [zipCode]);
 
   return (
-    <div>
-      <h1>Tonight's Visibility</h1>
-      {/* weather stuff*/}
-      <Weather latitude={latitude} longitude={longitude} timeZone={timeZone} />
-
-      <h2>Enter your zip code to see what you can see tonight!</h2>
-      <input
-        type="text"
-        value={zipCode}
-        onChange={(event) => setZipCode(event.target.value)}
-      />
-
-      {visibleObjects.map((object) => {
-        const imgURL = "/planet-icons/" + object.name.toLowerCase() + ".svg";
-        return (
-          <div key={object.name}>
-            <img src={imgURL}></img>
-            <h2>{object.name}</h2>
-            <p>Constellation: {object.constellation}</p>
-            <p>Altitude: {object.altitude.toFixed(2)} Degrees</p>
-          </div>
-        );
-      })}
+    <div id="visibility" class="section">
+      <h1 >What's Visible Tonight</h1>
+      <div>
+        <div className="zipcode-container">
+          <h2>Enter your zip code: </h2>
+          <input
+            type="text"
+            value={zipCode}
+            onChange={(event) => setZipCode(event.target.value)}
+            id="zipcode-input"
+          />
+        </div>
+        <Weather
+          latitude={latitude}
+          longitude={longitude}
+          timeZone={timeZone}
+        />
+        <div className="card" id="objects-card">
+          {visibleObjects.length > 0 &&
+            visibleObjects.map((object) => {
+              const imgURL =
+                "/planet-icons/" + object.name.toLowerCase() + ".svg";
+              return (
+                <div key={object.name} className="object-container">
+                  <img src={imgURL}></img>
+                  <div className="object-info">
+                    <h2>{object.name}</h2>
+                    <p>Constellation: {object.constellation}</p>
+                    <p>Altitude: {object.altitude.toFixed(2)} Degrees</p>
+                  </div>
+                </div>
+              );
+            })}
+          {visibleObjects.length === 0 && <h2>No objects visible tonight</h2>}
+        </div>
+      </div>
     </div>
   );
 }
