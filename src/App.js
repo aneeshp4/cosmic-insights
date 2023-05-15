@@ -1,22 +1,16 @@
-
-import './styles/App.css';
-import PictureOfTheDay from './components/PictureOfTheDay';
-import ObservingConditions from './components/ObservingConditions';
-import News from './components/News';
+import "./styles/App.css";
+import PictureOfTheDay from "./components/PictureOfTheDay";
+import ObservingConditions from "./components/ObservingConditions";
+import News from "./components/News";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-
-        <PictureOfTheDay>
-
-        </PictureOfTheDay>
-        <ObservingConditions>
-
-        </ObservingConditions>
-        <News>
-
-        </News>
+      <Navbar />
+      <PictureOfTheDay />
+      <ObservingConditions />
+      <News />
     </div>
   );
 }
