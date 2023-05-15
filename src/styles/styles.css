@@ -137,9 +137,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #ccc;
   height: 100%;
+  width: 85%;
   border-radius: 5px;
   box-shadow: 0 0 10px #ccc;
   background-color: rgb(248, 254, 255);
@@ -153,8 +154,16 @@
   }
 }
 
+.news-item h2 {
+  font-size: 1.2em;
+}
+
+.news-item p {
+  font-size: 0.9em;
+}
+
 .news-img {
-  width: 80%;
+  width: 30%;
 }
 
 .react-multiple-carousel__arrow {
@@ -176,20 +185,19 @@ nav ul {
   display: flex;
 }
 
-nav h1{
-  display:inline;
+nav h1 {
+  display: inline;
   margin: 0;
   padding: 8px 40px;
 }
 
-nav h1 i{
+nav h1 i {
   padding-right: 15px;
 }
 
 nav li {
   float: left;
 }
-
 
 nav li a {
   display: block;
