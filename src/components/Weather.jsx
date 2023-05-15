@@ -33,7 +33,6 @@ function Weather({ latitude, longitude, timeZone }) {
 
         // Set the weather state to the ideal period
         setWeather(idealPeriod);
-        console.log(weather);
       } catch (error) {
         console.log(error);
       }
@@ -43,27 +42,34 @@ function Weather({ latitude, longitude, timeZone }) {
 
   return (
     <div className="card" id="weather-card">
+      {/* Render the appropriate weather icon */}
       {weather &&
         weather.shortForecast &&
         weather.shortForecast.toLowerCase().includes("Rain") && (
           <img src="/weather-icons/rain.svg" alt="rain" />
         )}
+
       {weather &&
         weather.shortForecast &&
         weather.shortForecast.toLowerCase().includes("cloud") && (
           <img src="/weather-icons/partly-cloudy.svg" alt="cloudy" />
         )}
+
       {weather &&
         weather.shortForecast &&
         weather.shortForecast.toLowerCase().includes("clear") && (
           <img src="/weather-icons/clear.svg" alt="clear" />
         )}
+
       <div className="weather-info">
         <h3>{weather.shortForecast}</h3>
+
         <p>🌡️ Temperature: {weather.temperature}°F</p>
+
         {weather && weather.relativeHumidity && (
           <p>💧 Relative Humidity: {weather.relativeHumidity.value}%</p>
         )}
+
         {/* conditionally render precipitation if it will rain */}
         {weather &&
           weather.probabilityOfPrecipitation &&
@@ -73,6 +79,7 @@ function Weather({ latitude, longitude, timeZone }) {
               {weather.probabilityOfPrecipitation.value}%
             </p>
           )}
+
         <p>💨 Wind Speed: {weather.windSpeed}</p>
       </div>
     </div>
