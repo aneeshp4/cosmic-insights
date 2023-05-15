@@ -8,17 +8,17 @@ function News() {
   const [news, setNews] = useState([]);
   const responsive = {
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 1150 },
       items: 3,
       slidesToSlide: 3,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1150, min: 900 },
       items: 2,
       slidesToSlide: 2,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 900, min: 0 },
       items: 1,
       slidesToSlide: 1,
     },
@@ -76,7 +76,6 @@ function News() {
                   />
                   <p>{article.summary}</p>
                 </div>
-                
               </div>
             );
           })}

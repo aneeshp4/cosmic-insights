@@ -145,6 +145,7 @@
   box-shadow: 0 0 10px #ccc;
   background-color: rgb(248, 254, 255);
   color: black;
+  max-width: 450px;
 
   transition: transform 0.6s ease-in-out;
 
