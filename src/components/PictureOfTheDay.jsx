@@ -9,24 +9,30 @@ function PictureOfTheDay(props) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
         setData(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <div id="potd" class="section">
       <h1 className="potd-title">{data.title}</h1>
+
       <div className="card">
+        
         <div className="potd-image">
           <img id="potd-img" src={data.url} alt={data.title} />
         </div>
+
         <p className="potd-desc">{data.explanation}</p>
+
       </div>
     </div>
   );
