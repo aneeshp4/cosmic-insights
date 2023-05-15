@@ -42,14 +42,29 @@ function Weather({ latitude, longitude, timeZone }) {
   }, [latitude, longitude, timeZone]);
 
   return (
-    <div className="weather">
-      <h2>Tonight's Weather</h2>
+    <div className="card" id="weather-card">
+      {weather &&
+        weather.shortForecast &&
+        weather.shortForecast.toLowerCase().includes("Rain") && (
+          <img src="/weather-icons/rain.svg" alt="rain" />
+        )}
+      {weather &&
+        weather.shortForecast &&
+        weather.shortForecast.toLowerCase().includes("cloud") && (
+          <img src="/weather-icons/partly-cloudy.svg" alt="cloudy" />
+        )}
+      {weather &&
+        weather.shortForecast &&
+        weather.shortForecast.toLowerCase().includes("clear") && (
+          <img src="/weather-icons/clear.svg" alt="clear" />
+        )}
       <div className="weather-info">
         <h3>{weather.shortForecast}</h3>
         <p>Temperature: {weather.temperature}°F</p>
         {weather && weather.relativeHumidity && (
           <p>Relative Humidity: {weather.relativeHumidity.value}%</p>
         )}
+        {/* conditionally render precipitation if it will rain */}
         {weather &&
           weather.probabilityOfPrecipitation &&
           weather.probabilityOfPrecipitation.value > 10 && (
