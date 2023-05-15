@@ -10,17 +10,17 @@ function News() {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 3,
-      slidesToSlide: 3, // optional, default to 1.
+      slidesToSlide: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 2,
-      slidesToSlide: 2, // optional, default to 1.
+      slidesToSlide: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
   };
 
@@ -30,20 +30,18 @@ function News() {
         // Get the current date and time
         const currentDate = new Date();
 
-        // Calculate the date 7 days ago
+        // Calculate the date 7 days ago (getting articles from the last week)
         const sevenDaysAgo = new Date(
           currentDate.getTime() - 7 * 24 * 60 * 60 * 1000
         );
 
         // Get the ISO date string of 7 days ago
         const isoDate = sevenDaysAgo.toISOString();
-        console.log(isoDate);
 
+        // Make request to get the news articles
         const newsURL = `https://api.spaceflightnewsapi.net/v4/articles/?limit=10&published_at__gte=${isoDate}`;
         const newsRequest = await axios.get(newsURL);
-        console.log(newsRequest.data);
         setNews(newsRequest.data.results);
-        console.log(news);
       } catch (error) {
         console.log(error);
       }
@@ -53,12 +51,13 @@ function News() {
 
   const handleClick = (url) => {
     // Open the URL in a new tab or window when the div is clicked
-    window.open(url, "_blank"); // Replace with the desired website URL
+    window.open(url, "_blank");
   };
 
   return (
     <div id="news-section" class="section">
       <h1>News</h1>
+
       <div>
         <Carousel responsive={responsive} swipeable={false} draggable={false}>
           {news.map((article) => {
@@ -77,12 +76,12 @@ function News() {
                   />
                   <p>{article.summary}</p>
                 </div>
+                
               </div>
             );
           })}
         </Carousel>
       </div>
-  
     </div>
   );
 }

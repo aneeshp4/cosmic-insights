@@ -11,8 +11,6 @@ function ObservingConditions(props) {
   const [timeZone, setTimeZone] = useState("America/New_York");
   const [visibleObjects, setVisibleObjects] = useState([]);
 
-  const mapbox_url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${zipCode}.json?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,6 +20,7 @@ function ObservingConditions(props) {
         }
 
         // Get the latitude and longitude of the zip code using mapbox API
+        const mapbox_url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${zipCode}.json?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
         const mapBoxRequest = await axios.get(mapbox_url);
         const location = mapBoxRequest.data.features[0].center;
         const lng = Math.floor(location[0]);
@@ -66,7 +65,6 @@ function ObservingConditions(props) {
 
   return (
     <div id="visibility" class="section">
-      
       <h1>What's Visible Tonight</h1>
       <div>
         <div className="zipcode-container">
@@ -105,7 +103,6 @@ function ObservingConditions(props) {
 
           {/* If there are no objects to render, display a message */}
           {visibleObjects.length === 0 && <h2>No objects visible tonight</h2>}
-
         </div>
       </div>
     </div>
