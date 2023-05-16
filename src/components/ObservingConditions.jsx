@@ -51,7 +51,7 @@ function ObservingConditions(props) {
 
         let isoDateTime = currentDate.toISOString(); // Get the ISO date-time string for the visibleplanets API call
 
-        // Get the visible objects at the zip code and at 9pm/current time using the visibleplanets API
+        // Get the visible objects at the zip code and at 11pm/current time using the visibleplanets API
         const visible_planets_url = `https://api.visibleplanets.dev/v3?latitude=${lat}&longitude=${lng}&time=${isoDateTime}`;
         const response2 = await axios.get(visible_planets_url);
         setVisibleObjects(response2.data.data);

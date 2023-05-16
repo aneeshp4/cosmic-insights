@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Cosmic Insights
+Hosted at: https://cosmic-insights.onrender.com/
+### Description and Features
+Cosmic Insights is a website that allows astronomy lovers to learn more about space and also lets them know what celestial bodies will be visible at night (or are currently visible if it is night).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It's main features are:
+- A picture of the day, provided by NASA
+- A weather and visibility report that shows which celestial bodies will be visible at night
+- A news section that contains space related articles from the past week
 
-## Available Scripts
+[![Cosmic Insights Video](https://img.youtube.com/vi/Pbb-nOvb2I4/0.jpg)](https://www.youtube.com/watch?v=Pbb-nOvb2I4)
 
-In the project directory, you can run:
+### Technologies Used
 
-### `npm start`
+I used JavaScript and React to build this web app, and render.com to host it.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation Instructions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Assuming you've cloned this repository and you have NodeJS installed.
+1. Run `npm install` to install all the packages and dependencies to host the web app locally.
+2. Run `npm start` to start the web app locally in development mode.
+3. Open http://localhost:3000 to view it in the browser.
 
-### `npm test`
+### APIs Used in This Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [NASA API](https://api.nasa.gov/)
+    - The NASA API is used to get the picture of the day, along with its description and title.
+- [Weather API](https://www.weather.gov/documentation/services-web-api#/default/gridpoint_forecast_hourly)
+    - The Weather API is used to get the weather forecast for the upcoming/current night, to go along with the visibility report.
+- [Visbility API](https://github.com/csymlstd/visible-planets-api)
+    - The Visibility API is used to get the visibility report for the upcoming/current night, to find out which celestial bodies will be visible at night.
+- [Mapbox API](https://docs.mapbox.com/api/overview/)
+    - The Mapbox API is used to find the associated latitude and longitude of the user's inputted zipcode, so that the weather and visibility report can be generated for that location.
+- [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview)
+    - The Google Maps API is used to get the timezone of the user's inputted zipcode, so that the weather and visibility report can be generated properly, timewise, for that location.
+- [Spaceflight News API](https://spaceflightnewsapi.net/)
+    - The Spaceflight News API is used to get the space related articles from the past week.
